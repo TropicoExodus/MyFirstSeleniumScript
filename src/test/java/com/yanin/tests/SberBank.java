@@ -68,6 +68,10 @@ public class SberBank {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        WebElement clickBaseMenu = baseMenu.findElement(By.xpath("./.."));
+        Assert.assertTrue("Клик не выполнен", clickBaseMenu.getAttribute("class").contains("opened"));
+
 //      Переход на экран "Все страховые программы"
         WebElement subMenu = driver.findElement(By.xpath("//a[contains(text(), 'Все страховые программы') and contains (@href, 'bank_inshure')]"));
         subMenu.click();
@@ -78,10 +82,9 @@ public class SberBank {
             e.printStackTrace();
         }
 //      Проверка перехода на страницу с программами страхования
-        WebElement inshCheck = driver.findElement(By.xpath("//span[@class='dk-sbol-button__text dk-sbol-button__text_size_md']"));
+        WebElement inshCheck = driver.findElement(By.xpath("//div/a//span/span[@class='dk-sbol-button__text dk-sbol-button__text_size_md']"));
 
-        Assert.assertTrue("Страница не загрузилась",inshCheck.isDisplayed() &&
-                inshCheck.getText().contains("Оформить онлайн"));
+        Assert.assertTrue("Страница не загрузилась",inshCheck.isDisplayed());
 
 
         String errorMessage = "Текст на кнопке не совпал\n" +
