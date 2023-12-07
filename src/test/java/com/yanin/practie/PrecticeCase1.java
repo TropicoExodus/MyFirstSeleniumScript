@@ -25,4 +25,8 @@ public class PrecticeCase1 {
         wait = new WebDriverWait(chromeDriver, 10, 2000);
         chromeDriver.get("https://training.appline.ru/user/login");
     }
+
+    @Test
+    public void test() {
+    }
 }
