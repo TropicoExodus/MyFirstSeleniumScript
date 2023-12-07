@@ -27,6 +27,6 @@ public class PrecticeCase1 {
     }
 
     @Test
-    public void test() {
+    public void practice1() {
     }
 }
