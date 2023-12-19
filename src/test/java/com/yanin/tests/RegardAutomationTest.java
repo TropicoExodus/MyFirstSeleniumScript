@@ -21,8 +21,13 @@ public class RegardAutomationTest {
         driver.manage().window().maximize();
         driver.get("http://regard.ru");
 
-        driver.findElement(By.xpath("//div[@class='NavigationBar_burger__j7lZE']")).click(); // Открываем бургер-меню "Каталог"
-        driver.findElement(By.xpath("//div//a[@data-id='1536']")).click(); // Выбираем раздел комплектующих
+        // Открываем бургер-меню "Каталог"
+        WebElement baseCatalog = driver.findElement(By.xpath("//div[@class='NavigationBar_burger__j7lZE']"));
+        baseCatalog.click();
+
+        // Выбираем раздел каталога
+        WebElement subCatalog = driver.findElement(By.xpath("//div//a[@data-id='1536']"));
+        subCatalog.click();
 
         try {
             Thread.sleep(3000);
@@ -30,7 +35,9 @@ public class RegardAutomationTest {
             e.printStackTrace();
         }
 
-        driver.findElement(By.xpath("//p[@class='CardCategory_title__K2CCX' and contains(text(),'Видеокарты')]")).click(); // Выбираем "Видеокарты"
+        // Выбираем категорию товаров
+        WebElement categoryCatalog = driver.findElement(By.xpath("//p[@class='CardCategory_title__K2CCX' and contains(text(),'Видеокарты')]"));
+        categoryCatalog.click();
 
         try {
             Thread.sleep(3000);
@@ -42,7 +49,8 @@ public class RegardAutomationTest {
         priceFilter.sendKeys("20000");
 
         // Выбираем производителя Gigabyte
-        driver.findElement(By.xpath("//label[contains(text(),'Gigabyte')]")).click();
+        WebElement setVendor = driver.findElement(By.xpath("//label[contains(text(),'Gigabyte')]"));
+        setVendor.click();
 
 
         // Проверяем количество товаров на странице
