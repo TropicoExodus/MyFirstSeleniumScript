@@ -1,4 +1,4 @@
-package com.yanin.tests;
+package com.yanin.framewok.tests;
 
 import org.junit.After;
 import org.junit.Assert;
