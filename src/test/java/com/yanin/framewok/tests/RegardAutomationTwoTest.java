@@ -1,48 +1,18 @@
 package com.yanin.framewok.tests;
 
-import org.junit.After;
-import org.junit.Before;
+import com.yanin.framewok.base.BaseTests;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
-public class RegardAutomationTestTwo {
-
-    WebDriver driver;
-    WebDriverWait waitTime;
-    @Before
-    public void before() {
-        // WebDriver path
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-
-
-//        driver.navigate().to("https://www.sberbank.ru/ru/person");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        waitTime = new WebDriverWait(driver, 10, 2000);
-        driver.get("http://regard.ru");
-
-    }
+public class RegardAutomationTwoTest extends BaseTests {
 
     @Test
-    public void test() {
-
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+    //@DisplayName("Тест кейс Клавиатуры")
+    public void test2() {
 
         // Открываем бургер-меню "Каталог"
         String baseCatalogXpath = "//div[@class='NavigationBar_burger__j7lZE']";
@@ -113,8 +83,6 @@ public class RegardAutomationTestTwo {
 
 
     }
-    @After
-    public void after(){
-        driver.quit();
-    }
+
+
 }
