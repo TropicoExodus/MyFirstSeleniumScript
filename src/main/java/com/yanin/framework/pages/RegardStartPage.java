@@ -8,6 +8,7 @@ import java.util.List;
 
 public class RegardStartPage {
 
+    //
 
     @FindBy(xpath = "//div[@class='NavigationBar_burger__j7lZE']")
     private WebElement baseCatalog;
