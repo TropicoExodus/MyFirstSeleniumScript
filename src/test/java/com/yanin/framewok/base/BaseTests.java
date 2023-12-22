@@ -26,8 +26,8 @@ public class BaseTests {
         driver.get("http://regard.ru");
 
     }
-    @After
-    public void after(){
-        driver.quit();
-    }
+//    @After
+//    public void after(){
+//        driver.quit();
+//    }
 }
