@@ -1,6 +1,7 @@
 package com.yanin.framewok.tests;
 
 import com.yanin.framewok.base.BaseTests;
+import com.yanin.framework.pages.RegardStartPage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -10,33 +11,30 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RegardAutomationOneTest extends BaseTests {
 
-
+    RegardStartPage regardStartPage = new RegardStartPage();
 
 
     @Test
-    //@DisplayName("Тест кейс Процессоры")
     public void test1() {
 
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // Открываем бургер-меню "Каталог"
-        String baseCatalogXpath = "//div[@class='NavigationBar_burger__j7lZE']";
-        WebElement baseCatalog = driver.findElement(By.xpath(baseCatalogXpath));
-        baseCatalog.click();
+        regardStartPage.openCatalogMenu();
 
         // Выбираем раздел каталога
-        String subCatalogXpath = "//div//a/div[text()='Комплектующие для ПК']";
-        WebElement subCatalog = driver.findElement(By.xpath(subCatalogXpath));
-        subCatalog.click();
+        regardStartPage.selectSubCatalogByText("Комплектующие");
 
         //Проверяем, выбран ли раздел каталог
         WebElement subCatalogLoad = driver.findElement(By.xpath("//div[@class='div page_title h1']"));
         waitTime.until(ExpectedConditions.attributeContains(subCatalogLoad, "class", "div page_title h1"));
 
         // Выбираем категорию товаров
-        String categoryCatalogXpath = "//p[@class='CardCategory_title__K2CCX' and contains(text(),'Процессоры')]";
-        WebElement categoryCatalog = driver.findElement(By.xpath(categoryCatalogXpath));
-        categoryCatalog.click();
-
+        regardStartPage.selectCategoryByText("Процессоры");
 
         // Задаем фильтр по цене
         String priceFilterXpath = "//div/input[@class='RangeSelector_input__26nqz range-selector-input' and @name='min'][1]";
