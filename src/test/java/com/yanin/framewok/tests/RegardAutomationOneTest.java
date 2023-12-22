@@ -24,7 +24,7 @@ public class RegardAutomationOneTest extends BaseTests {
         // Выбираем раздел каталога
         regardStartPage.selectSubCatalogByText("Комплектующие");
 
-        //Проверяем, выбран ли раздел каталог
+        //Проверяем выбран ли раздел каталог
         WebElement subCatalogLoad = driver.findElement(By.xpath("//div[@class='div page_title h1']"));
         waitTime.until(ExpectedConditions.attributeContains(subCatalogLoad, "class", "div page_title h1"));
 
