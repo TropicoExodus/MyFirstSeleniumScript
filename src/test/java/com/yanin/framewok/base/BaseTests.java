@@ -8,10 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class BaseTests  {
+public class BaseTests {
     protected WebDriver driver;
     protected WebDriverWait waitTime;
-
     @Before
     public void before() {
         // WebDriver path
@@ -27,9 +26,8 @@ public class BaseTests  {
         driver.get("http://regard.ru");
 
     }
-
     @After
-    public void after() {
+    public void after(){
         driver.quit();
     }
 }

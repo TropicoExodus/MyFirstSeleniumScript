@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class RegardStartPage extends  {
+public class RegardStartPage {
 
 
     @FindBy(xpath = "//div[@class='NavigationBar_burger__j7lZE']")
