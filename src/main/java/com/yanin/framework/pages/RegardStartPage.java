@@ -60,16 +60,6 @@ public class RegardStartPage {
         Assert.fail("Меню с текстом " + catalogMenu + "не найдено в каталоге");
     }
 
-    public void selectCategoryByText(String categoryMenu) {
-        for (WebElement itemMenu: categoryCatalog) {
-            if(itemMenu.getText().contains(categoryMenu)) {
-                itemMenu.click();
-                waitTime.until(ExpectedConditions.attributeContains(categoryCatalogLoad, "class", "ViewChanger_switcher__FpPel"));
-                return;
-            }
-        }
 
-        Assert.fail("Категория с текстом " + categoryMenu + "не найдено в каталоге");
-    }
 
 }
