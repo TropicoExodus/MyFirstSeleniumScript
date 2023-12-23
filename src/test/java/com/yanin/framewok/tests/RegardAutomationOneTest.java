@@ -14,16 +14,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RegardAutomationOneTest extends BaseTests {
 
-    private RegardStartPage regardStartPage;
-    private RegardCatalogPage regardCatalogPage;
-    private RegardFindResultPage regardFindResultPage;
-
-    @Before
-    public void setUp() {
-        regardStartPage = new RegardStartPage(driver);
-        regardCatalogPage = new RegardCatalogPage(driver);
-        regardFindResultPage = new RegardFindResultPage(driver);
-    }
+    RegardStartPage regardStartPage = new RegardStartPage();
+    RegardCatalogPage regardCatalogPage = new RegardCatalogPage();
+    RegardFindResultPage regardFindResultPage = new RegardFindResultPage();
 
 
 
@@ -35,19 +28,20 @@ public class RegardAutomationOneTest extends BaseTests {
         regardStartPage.openCatalogMenu();
 
         // Выбираем раздел каталога
-        regardStartPage.selectSubCatalogByText("Комплектующие");
+        regardStartPage.selectSubCatalogByText("Периферия");
 
         // Выбираем категорию товаров
-        regardCatalogPage.selectCategoryByText("Материнские платы");
+        regardCatalogPage.selectCategoryByText("Клавиатуры");
+
 
         //Задаем фильтр по цене
-        regardCatalogPage.setMinPriceFilter("20000");
+        regardCatalogPage.setMinPriceFilter("2000");
 
         // Ждем обновления количества товаров после фильтрации
         regardCatalogPage.waitForFilterCountToUpdate();
 
         //Задаем фильтр по производителю
-        regardCatalogPage.setVendorByCheck("ASRock");
+        regardCatalogPage.setVendorByCheck("A4Tech");
 
         // Ждем обновления количества товаров после фильтрации
         regardCatalogPage.waitForFilterCountToUpdate();
@@ -68,7 +62,8 @@ public class RegardAutomationOneTest extends BaseTests {
         //Проверяем количество найденных товаров
         regardFindResultPage.checkItemCount();
 
-//        regardFindResultPage.checkFindItemName(regardFindResultPage.firstProductName);
+        regardFindResultPage.checkFoundProductName(regardCatalogPage.getFirstProductInList());
+
 
 
     }

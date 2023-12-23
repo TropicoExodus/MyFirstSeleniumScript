@@ -1,6 +1,7 @@
 package com.yanin.framework.pages;
 
 
+import com.yanin.framework.managers.DriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,8 +14,9 @@ import java.util.List;
 
 public class RegardStartPage {
 
-    private WebDriver driver;
-    private WebDriverWait waitTime;
+    protected DriverManager driverManager = DriverManager.getInstance();
+
+    protected WebDriverWait waitTime = new  WebDriverWait(driverManager.getDriver(), 10,1000);
 
 
     @FindBy(xpath = "//div[@class='NavigationBar_burger__j7lZE']")
@@ -34,10 +36,8 @@ public class RegardStartPage {
     private WebElement categoryCatalogLoad;
 
 
-    public RegardStartPage(WebDriver driver){
-        this.driver = driver;
-        waitTime = new WebDriverWait(driver, 10);
-        PageFactory.initElements(driver, this);
+    public RegardStartPage(){
+        PageFactory.initElements(driverManager.getDriver(), this);
     }
 
     public RegardStartPage openCatalogMenu() {
@@ -57,7 +57,7 @@ public class RegardStartPage {
             }
         }
 
-        Assert.fail("Меню с текстом " + catalogMenu + "не найдено в каталоге");
+        Assert.fail("Меню с текстом " + catalogMenu + " не найдено в каталоге");
     }
 
 

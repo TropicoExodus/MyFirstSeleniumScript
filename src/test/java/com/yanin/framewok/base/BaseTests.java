@@ -1,5 +1,6 @@
 package com.yanin.framewok.base;
 
+import com.yanin.framework.managers.DriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -9,25 +10,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTests {
-    protected WebDriver driver;
-    protected WebDriverWait waitTime;
+    private DriverManager driverManager = DriverManager.getInstance();
     @Before
     public void before() {
-        // WebDriver path
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
 
-
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        waitTime = new WebDriverWait(driver, 10, 2000);
-        driver.get("http://regard.ru");
+        driverManager.getDriver().get("http://regard.ru");
 
     }
-//    @After
-//    public void after(){
-//        driver.quit();
-//    }
+ @After
+public void after(){
+     driverManager.getDriver().quit();
+   }
 }

@@ -1,6 +1,7 @@
 package com.yanin.framework.pages;
 
 
+import com.yanin.framework.managers.DriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,8 +14,8 @@ import java.util.regex.Pattern;
 
 
 public class RegardFindResultPage {
-    private WebDriver driver;
-    private WebDriverWait waitTime;
+    protected DriverManager driverManager = DriverManager.getInstance();
+    protected WebDriverWait waitTime = new WebDriverWait(driverManager.getDriver(), 10,1000);
 
     @FindBy(xpath = "//div[@class='ListingFilters_filterMeta__nF_BZ']")
     private WebElement findCountElement;
@@ -24,10 +25,8 @@ public class RegardFindResultPage {
 
 
 
-    public RegardFindResultPage(WebDriver driver) {
-        this.driver = driver;
-        waitTime = new WebDriverWait(driver, 10);
-        PageFactory.initElements(driver, this);
+    public RegardFindResultPage() {
+        PageFactory.initElements(driverManager.getDriver(), this);
     }
 
     public RegardFindResultPage waitForFindCountToUpdate() {
@@ -45,6 +44,16 @@ public class RegardFindResultPage {
         } else {
             Assert.fail("Не удалось найти количество товаров в в поисковой выдаче");
         }
+    }
+
+//    public String getFoundProductName() {
+//        waitTime.until(ExpectedConditions.visibilityOf(findedItem));
+//        return findedItem.getAttribute("title");
+//    }
+
+    public void checkFoundProductName(String expectedProductName) {
+        String actualProductName = findedItem.getAttribute("title");
+        Assert.assertEquals("Наименование найденного товара не соответствует ожидаемому", expectedProductName, actualProductName);
     }
 
 

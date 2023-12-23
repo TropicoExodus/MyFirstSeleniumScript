@@ -1,6 +1,7 @@
 package com.yanin.framework.pages;
 
 
+import com.yanin.framework.managers.DriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,8 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class RegardCatalogPage {
-    private WebDriver driver;
-    private WebDriverWait waitTime;
+    protected DriverManager driverManager = DriverManager.getInstance();
+    protected WebDriverWait waitTime = new WebDriverWait(driverManager.getDriver(), 10,1000);
 
 
 
@@ -53,10 +54,8 @@ public class RegardCatalogPage {
 
 
 
-    public RegardCatalogPage(WebDriver driver){
-        this.driver = driver;
-        waitTime = new WebDriverWait(driver, 10);
-        PageFactory.initElements(driver, this);
+    public RegardCatalogPage(){
+        PageFactory.initElements(driverManager.getDriver(), this);
     }
     public void selectCategoryByText(String categoryMenu) {
         for (WebElement itemMenu: categoryCatalog) {
