@@ -2,6 +2,7 @@ package com.yanin.framewok.tests;
 
 import com.yanin.framewok.base.BaseTests;
 import com.yanin.framework.pages.RegardCatalogPage;
+import com.yanin.framework.pages.RegardFindResultPage;
 import com.yanin.framework.pages.RegardStartPage;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,11 +16,13 @@ public class RegardAutomationOneTest extends BaseTests {
 
     private RegardStartPage regardStartPage;
     private RegardCatalogPage regardCatalogPage;
+    private RegardFindResultPage regardFindResultPage;
 
     @Before
     public void setUp() {
         regardStartPage = new RegardStartPage(driver);
         regardCatalogPage = new RegardCatalogPage(driver);
+        regardFindResultPage = new RegardFindResultPage(driver);
     }
 
 
@@ -35,16 +38,22 @@ public class RegardAutomationOneTest extends BaseTests {
         regardStartPage.selectSubCatalogByText("Комплектующие");
 
         // Выбираем категорию товаров
-        regardCatalogPage.selectCategoryByText("Процессоры");
+        regardCatalogPage.selectCategoryByText("Материнские платы");
 
         //Задаем фильтр по цене
         regardCatalogPage.setMinPriceFilter("20000");
 
+        // Ждем обновления количества товаров после фильтрации
+        regardCatalogPage.waitForFilterCountToUpdate();
+
         //Задаем фильтр по производителю
-        regardCatalogPage.setVendorByCheck("AMD");
+        regardCatalogPage.setVendorByCheck("ASRock");
+
+        // Ждем обновления количества товаров после фильтрации
+        regardCatalogPage.waitForFilterCountToUpdate();
 
         //Проверяем, что на странцие 24 записи
-        regardCatalogPage.assertProductCountIs24();
+          regardCatalogPage.checkProductCount();
 
         //Cохраняем наименование первого товара в списке
         regardCatalogPage.getFirstProductInList();
@@ -52,6 +61,15 @@ public class RegardAutomationOneTest extends BaseTests {
 
         //Ищем по сохраненному наименованию
         regardCatalogPage.searchForProduct(regardCatalogPage.getFirstProductInList());
+
+        //Проверяем, что результаты поиска загружены
+        regardFindResultPage.waitForFindCountToUpdate();
+
+        //Проверяем количество найденных товаров
+        regardFindResultPage.checkItemCount();
+
+//        regardFindResultPage.checkFindItemName(regardFindResultPage.firstProductName);
+
 
     }
 

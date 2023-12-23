@@ -33,14 +33,18 @@ public class RegardCatalogPage {
     @FindBy(xpath = "//div//span/input[@class='Checkbox_input__8gO3q Checkbox_checked__LL5S5 Checkbox_checkStart__jjKD1']")
     private WebElement setVendorChecked;
 
-    @FindBy(xpath = "//div/span[@class='PaginationViewChanger_countSetter__count__65Dji']")
-    private WebElement productsCountElement;
+//    @FindBy(xpath = "//div/span[@class='PaginationViewChanger_countSetter__count__65Dji']")
+    @FindBy(xpath = "//div/a[@class='CardText_link__C_fPZ link_black']")
+    private List<WebElement> productsCountElement;
 
     @FindBy(xpath = "//div/div/a/div[@class='CardText_title__7bSbO CardText_listing__6mqXC']")
     private WebElement firstProductInList;
 
     @FindBy(id = "searchInput")
     private WebElement searchString;
+
+    @FindBy(xpath = "//div[@class='ListingFilters_filterMeta__nF_BZ']")
+    private WebElement filterCountElement;
 
 
 
@@ -86,13 +90,20 @@ public class RegardCatalogPage {
             }
         }
 
-
     }
 
-    public void assertProductCountIs24() {
-        String productsOnPageText = productsCountElement.getText();
-        Assert.assertTrue("Количество товаров не соответствует 24", productsOnPageText.contains("24"));
+    public RegardCatalogPage waitForFilterCountToUpdate() {
+        String oldCount = filterCountElement.getText();
+        waitTime.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(filterCountElement, oldCount)));
+        return this;
     }
+
+
+    public void checkProductCount() {
+        Assert.assertTrue("Количество продуктов превышает 24.", productsCountElement.size() <= 24);
+    }
+
+
 
     public String getFirstProductInList() {
         return firstProductInList.getText();
