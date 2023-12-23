@@ -2,9 +2,9 @@ package com.yanin.framework.pages;
 
 
 import com.yanin.framework.managers.DriverManager;
+import com.yanin.framework.managers.PageManager;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,6 +16,8 @@ import java.util.List;
 public class RegardCatalogPage {
     protected DriverManager driverManager = DriverManager.getInstance();
     protected WebDriverWait waitTime = new WebDriverWait(driverManager.getDriver(), 10,1000);
+    protected PageManager pageManager = PageManager.getInstance();
+
 
 
 
@@ -57,17 +59,20 @@ public class RegardCatalogPage {
     public RegardCatalogPage(){
         PageFactory.initElements(driverManager.getDriver(), this);
     }
-    public void selectCategoryByText(String categoryMenu) {
-        for (WebElement itemMenu: categoryCatalog) {
-            if(itemMenu.getText().contains(categoryMenu)) {
+    public RegardCatalogPage selectCategoryByText(String categoryMenu) {
+        for (WebElement itemMenu : categoryCatalog) {
+            if (itemMenu.getText().contains(categoryMenu)) {
                 itemMenu.click();
                 waitTime.until(ExpectedConditions.attributeContains(categoryCatalogLoad, "class", "ViewChanger_switcher__FpPel"));
-                return;
+                return pageManager.getRegardCatalogPage();
+
             }
+        }
+            return pageManager.getRegardCatalogPage();
         }
 
 
-    }
+
 
     public RegardCatalogPage setMinPriceFilter(String priceValue) {
         waitTime.until(ExpectedConditions.visibilityOf(minPriceInput));
@@ -77,39 +82,44 @@ public class RegardCatalogPage {
 
         // Проверяем, что значение введено корректно
         waitTime.until(ExpectedConditions.attributeToBe(minPriceInput, "value", priceValue));
-        return this;
+        return pageManager.getRegardCatalogPage();
     }
 
-    public void setVendorByCheck(String vendorCheckbox) {
+    public RegardCatalogPage setVendorByCheck(String vendorCheckbox) {
         for (WebElement itemMenu: setVendor) {
             if(itemMenu.getText().contains(vendorCheckbox)) {
                 itemMenu.click();
                 waitTime.until(ExpectedConditions.attributeContains(setVendorChecked, "class", "Checkbox_input__8gO3q Checkbox_checked__LL5S5 Checkbox_checkStart__jjKD1"));
-                return;
+                return pageManager.getRegardCatalogPage();
             }
         }
 
+        return pageManager.getRegardCatalogPage();
     }
 
     public RegardCatalogPage waitForFilterCountToUpdate() {
         String oldCount = filterCountElement.getText();
         waitTime.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(filterCountElement, oldCount)));
-        return this;
+        return pageManager.getRegardCatalogPage();
     }
 
 
-    public void checkProductCount() {
+    public RegardCatalogPage checkProductCount() {
         Assert.assertTrue("Количество продуктов превышает 24.", productsCountElement.size() <= 24);
+        return pageManager.getRegardCatalogPage();
+
     }
 
 
 
-    public String getFirstProductInList() {
+    public String getFirstProductText() {
+        waitTime.until(ExpectedConditions.visibilityOf(firstProductInList));
         return firstProductInList.getText();
 
     }
 
-    public void searchForProduct(String productName) {
+    public RegardFindResultPage searchForProduct() {
+        String productName = getFirstProductText();
         searchString.click();
 
         waitTime.until(ExpectedConditions.attributeContains(searchString, "class", "Input_focused"));
@@ -120,6 +130,7 @@ public class RegardCatalogPage {
         Assert.assertTrue("Строка поиска не заполнена", searchString.getAttribute("value").contains(productName));
 
         searchString.sendKeys(Keys.ENTER);
+        return pageManager.getRegardFindResultPage();
     }
 }
 

@@ -2,6 +2,7 @@ package com.yanin.framework.pages;
 
 
 import com.yanin.framework.managers.DriverManager;
+import com.yanin.framework.managers.PageManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,8 @@ import java.util.regex.Pattern;
 public class RegardFindResultPage {
     protected DriverManager driverManager = DriverManager.getInstance();
     protected WebDriverWait waitTime = new WebDriverWait(driverManager.getDriver(), 10,1000);
+    protected PageManager pageManager = PageManager.getInstance();
+
 
     @FindBy(xpath = "//div[@class='ListingFilters_filterMeta__nF_BZ']")
     private WebElement findCountElement;
@@ -32,10 +35,10 @@ public class RegardFindResultPage {
     public RegardFindResultPage waitForFindCountToUpdate() {
         String oldCount = findCountElement.getText();
         waitTime.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(findCountElement, oldCount)));
-        return this;
+        return pageManager.getRegardFindResultPage();
     }
 
-    public void checkItemCount() {
+    public RegardFindResultPage checkItemCount() {
         String filterText = findCountElement.getText();
         Matcher matcher = Pattern.compile("\\d+").matcher(filterText);
         if (matcher.find()) {
@@ -44,6 +47,7 @@ public class RegardFindResultPage {
         } else {
             Assert.fail("Не удалось найти количество товаров в в поисковой выдаче");
         }
+        return pageManager.getRegardFindResultPage();
     }
 
 //    public String getFoundProductName() {
@@ -51,10 +55,12 @@ public class RegardFindResultPage {
 //        return findedItem.getAttribute("title");
 //    }
 
-    public void checkFoundProductName(String expectedProductName) {
+    public RegardFindResultPage checkFoundProductName(String expectedProductName) {
         String actualProductName = findedItem.getAttribute("title");
         Assert.assertEquals("Наименование найденного товара не соответствует ожидаемому", expectedProductName, actualProductName);
+        return pageManager.getRegardFindResultPage();
     }
+
 
 
 }

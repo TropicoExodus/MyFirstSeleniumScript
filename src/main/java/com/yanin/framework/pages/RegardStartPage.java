@@ -2,6 +2,7 @@ package com.yanin.framework.pages;
 
 
 import com.yanin.framework.managers.DriverManager;
+import com.yanin.framework.managers.PageManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,8 +16,8 @@ import java.util.List;
 public class RegardStartPage {
 
     protected DriverManager driverManager = DriverManager.getInstance();
-
     protected WebDriverWait waitTime = new  WebDriverWait(driverManager.getDriver(), 10,1000);
+    protected PageManager pageManager = PageManager.getInstance();
 
 
     @FindBy(xpath = "//div[@class='NavigationBar_burger__j7lZE']")
@@ -42,22 +43,23 @@ public class RegardStartPage {
 
     public RegardStartPage openCatalogMenu() {
         baseCatalog.click();
-        return this;
+        return pageManager.getRegardStartPage();
     }
 
 
 
 
-    public void selectSubCatalogByText(String catalogMenu) {
+    public RegardCatalogPage selectSubCatalogByText(String catalogMenu) {
         for (WebElement itemMenu: subCatalog) {
             if(itemMenu.getText().contains(catalogMenu)) {
                 itemMenu.click();
                 waitTime.until(ExpectedConditions.attributeContains(subCatalogLoad, "class", "div page_title h1"));
-                return;
+                return pageManager.getRegardCatalogPage();
             }
         }
 
         Assert.fail("Меню с текстом " + catalogMenu + " не найдено в каталоге");
+        return pageManager.getRegardCatalogPage();
     }
 
 

@@ -16,25 +16,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class DriverManager {
 
-    /**
-     * Переменна для хранения объекта веб-драйвера
-     *
-     * @see WebDriver
-     */
+
     private WebDriver driver;
 
 
-    /**
-     * Переменна для хранения объекта DriverManager
-     */
+
     private static DriverManager INSTANCE = null;
 
 
-    /**
-     * Конструктор специально был объявлен как private (singleton паттерн)
-     *
-     * @see DriverManager#getDriverManager()
-     */
     private DriverManager() {
     }
 
