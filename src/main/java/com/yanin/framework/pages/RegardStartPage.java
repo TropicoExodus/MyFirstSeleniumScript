@@ -3,6 +3,7 @@ package com.yanin.framework.pages;
 
 import com.yanin.framework.managers.DriverManager;
 import com.yanin.framework.managers.PageManager;
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,7 +41,7 @@ public class RegardStartPage {
     public RegardStartPage(){
         PageFactory.initElements(driverManager.getDriver(), this);
     }
-
+    @Step("Открываем бургер-меню")
     public RegardStartPage openCatalogMenu() {
         baseCatalog.click();
         return pageManager.getRegardStartPage();
@@ -48,7 +49,7 @@ public class RegardStartPage {
 
 
 
-
+    @Step("Открываем категорию {'catalogMenu'}")
     public RegardCatalogPage selectSubCatalogByText(String catalogMenu) {
         for (WebElement itemMenu: subCatalog) {
             if(itemMenu.getText().contains(catalogMenu)) {

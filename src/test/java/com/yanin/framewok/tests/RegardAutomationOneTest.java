@@ -3,6 +3,7 @@ package com.yanin.framewok.tests;
 import com.yanin.framewok.base.BaseTests;
 import com.yanin.framework.managers.DriverManager;
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ public class RegardAutomationOneTest extends BaseTests {
 
 
     @Test
+    @DisplayName("Сценарий 1 - Видеокарты")
     public void test1() {
 
 
@@ -36,7 +38,7 @@ public class RegardAutomationOneTest extends BaseTests {
     }
 
     @Test
-    @Step("")
+    @DisplayName("Сценарий 2 - Клавиатуры")
     public void test2() {
         pageManager.getRegardStartPage()
                 .openCatalogMenu()
@@ -55,6 +57,7 @@ public class RegardAutomationOneTest extends BaseTests {
 
 
     @Test
+    @DisplayName("Сценарий 3 - Ноутбуки")
     public void test3() {
         pageManager.getRegardStartPage()
                 .openCatalogMenu()
@@ -73,6 +76,6 @@ public class RegardAutomationOneTest extends BaseTests {
 
 @AfterClass
     public static void TearDown() {
-    DriverManager.getInstance().getDriver();
+    DriverManager.getInstance().quitDriver();
 }
 }

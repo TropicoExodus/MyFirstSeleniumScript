@@ -3,6 +3,7 @@ package com.yanin.framework.pages;
 
 import com.yanin.framework.managers.DriverManager;
 import com.yanin.framework.managers.PageManager;
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,7 +38,7 @@ public class RegardFindResultPage {
         waitTime.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(findCountElement, oldCount)));
         return pageManager.getRegardFindResultPage();
     }
-
+    @Step("Проверяем количество товаров в поисковой выдаче")
     public RegardFindResultPage checkItemCount() {
         String filterText = findCountElement.getText();
         Matcher matcher = Pattern.compile("\\d+").matcher(filterText);

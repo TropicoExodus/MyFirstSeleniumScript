@@ -3,6 +3,7 @@ package com.yanin.framework.pages;
 
 import com.yanin.framework.managers.DriverManager;
 import com.yanin.framework.managers.PageManager;
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -59,6 +60,7 @@ public class RegardCatalogPage {
     public RegardCatalogPage(){
         PageFactory.initElements(driverManager.getDriver(), this);
     }
+    @Step("Выбираем категорию {'categoryMenu'}")
     public RegardCatalogPage selectCategoryByText(String categoryMenu) {
         for (WebElement itemMenu : categoryCatalog) {
             if (itemMenu.getText().contains(categoryMenu)) {
@@ -73,7 +75,7 @@ public class RegardCatalogPage {
 
 
 
-
+    @Step("Вводим значение цены От {'priceValue'}")
     public RegardCatalogPage setMinPriceFilter(String priceValue) {
         waitTime.until(ExpectedConditions.visibilityOf(minPriceInput));
         minPriceInput.click();
@@ -84,7 +86,7 @@ public class RegardCatalogPage {
         waitTime.until(ExpectedConditions.attributeToBe(minPriceInput, "value", priceValue));
         return pageManager.getRegardCatalogPage();
     }
-
+    @Step(" Выбираем производителя {'vendorCheckbox'}")
     public RegardCatalogPage setVendorByCheck(String vendorCheckbox) {
         for (WebElement itemMenu: setVendor) {
             if(itemMenu.getText().contains(vendorCheckbox)) {
@@ -111,13 +113,13 @@ public class RegardCatalogPage {
     }
 
 
-
+    @Step(" Выбираем производителя {'getFirstProductText'}")
     public String getFirstProductText() {
         waitTime.until(ExpectedConditions.visibilityOf(firstProductInList));
         return firstProductInList.getText();
 
     }
-
+    @Step("Выполняем поиск товара {'getFirstProductText'}")
     public RegardFindResultPage searchForProduct() {
         String productName = getFirstProductText();
         searchString.click();

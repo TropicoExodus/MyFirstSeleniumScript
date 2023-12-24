@@ -87,7 +87,8 @@
           <properties>
             <property>
               <name>listener</name>
-              <value>io.qameta.allure.junit4.AllureJunit4</value>
+              <value>com.yanin.framework.utils.MyAllureListener</value>
+<!--              <value>io.qameta.allure.junit4.AllureJunit4</value>-->
             </property>
           </properties>
         </configuration>
