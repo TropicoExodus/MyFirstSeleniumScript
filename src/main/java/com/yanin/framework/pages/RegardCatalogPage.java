@@ -75,7 +75,7 @@ public class RegardCatalogPage {
 
 
 
-    @Step("Вводим значение цены От {'priceValue'}")
+    @Step("Вводим значение цены мин {'priceValue'}")
     public RegardCatalogPage setMinPriceFilter(String priceValue) {
         waitTime.until(ExpectedConditions.visibilityOf(minPriceInput));
         minPriceInput.click();

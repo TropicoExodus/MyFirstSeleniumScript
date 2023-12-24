@@ -44,12 +44,45 @@
       <version>${junit.version}</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.9.1</version>
+      <scope>test</scope>
+    </dependency>
+
+
     <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit4 -->
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-junit4</artifactId>
       <version>${allure-junit4}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>7.14.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber5-jvm -->
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-cucumber5-jvm</artifactId>
+      <version>2.15.0</version>
+    </dependency>
+
+
 
   </dependencies>
 
@@ -75,11 +108,12 @@
         <version>3.2.3</version>
         <configuration>
           <testFailureIgnore>true</testFailureIgnore>
-          <includes>**/*Test.java</includes>
+          <includes>**/*CucumberRunner.java</includes>
           <argLine>
             -Xmx1024m
             -Dfile.encoding=${encoding.type}
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+            -Dcucumber.options="--plugin io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
           </argLine>
           <systemPropertyVariables>
             <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>
@@ -87,7 +121,7 @@
           <properties>
             <property>
               <name>listener</name>
-              <value>com.yanin.framework.utils.MyAllureListener</value>
+<!--              <value>com.yanin.framework.utils.MyAllureListener</value>-->
 <!--              <value>io.qameta.allure.junit4.AllureJunit4</value>-->
             </property>
           </properties>
