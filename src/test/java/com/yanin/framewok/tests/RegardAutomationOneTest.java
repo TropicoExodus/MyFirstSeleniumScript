@@ -1,6 +1,9 @@
 package com.yanin.framewok.tests;
 
 import com.yanin.framewok.base.BaseTests;
+import com.yanin.framework.managers.DriverManager;
+import io.qameta.allure.Step;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 public class RegardAutomationOneTest extends BaseTests {
@@ -19,7 +22,7 @@ public class RegardAutomationOneTest extends BaseTests {
                 .selectCategoryByText("Видеокарты")
                 .setMinPriceFilter("20000")
                 .waitForFilterCountToUpdate()
-                .setVendorByCheck("ASUS")
+                .setVendorByCheck("Gigabyte")
                 .waitForFilterCountToUpdate()
                 .checkProductCount()
                 .searchForProduct()
@@ -33,6 +36,7 @@ public class RegardAutomationOneTest extends BaseTests {
     }
 
     @Test
+    @Step("")
     public void test2() {
         pageManager.getRegardStartPage()
                 .openCatalogMenu()
@@ -54,11 +58,11 @@ public class RegardAutomationOneTest extends BaseTests {
     public void test3() {
         pageManager.getRegardStartPage()
                 .openCatalogMenu()
-                .selectSubCatalogByText("Комплектующие для ПК")
-                .selectCategoryByText("Видеокарты")
-                .setMinPriceFilter("20000")
+                .selectSubCatalogByText("Компьютеры и ноутбуки")
+                .selectCategoryByText("Ноутбуки")
+                .setMinPriceFilter("70000")
                 .waitForFilterCountToUpdate()
-                .setVendorByCheck("Palit")
+                .setVendorByCheck("ASUS")
                 .waitForFilterCountToUpdate()
                 .checkProductCount()
                 .searchForProduct()
@@ -67,4 +71,8 @@ public class RegardAutomationOneTest extends BaseTests {
                 .checkFoundProductName(pageManager.getRegardCatalogPage().getFirstProductText());
     }
 
+@AfterClass
+    public static void TearDown() {
+    DriverManager.getInstance().getDriver();
+}
 }
