@@ -113,7 +113,7 @@ public class RegardCatalogPage {
     }
 
 
-    @Step(" Выбираем производителя {'getFirstProductText'}")
+    @Step("Выбираем производителя {'getFirstProductText'}")
     public String getFirstProductText() {
         waitTime.until(ExpectedConditions.visibilityOf(firstProductInList));
         return firstProductInList.getText();
