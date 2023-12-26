@@ -49,7 +49,7 @@ public class RegardStartPage {
 
 
 
-    @Step("Открываем категорию {'catalogMenu'}")
+    @Step("Открываем раздел '{catalogMenu}' и показываем ошибку, если он не найден")
     public RegardCatalogPage selectSubCatalogByText(String catalogMenu) {
         for (WebElement itemMenu: subCatalog) {
             if(itemMenu.getText().contains(catalogMenu)) {
@@ -58,7 +58,6 @@ public class RegardStartPage {
                 return pageManager.getRegardCatalogPage();
             }
         }
-
         Assert.fail("Меню с текстом " + catalogMenu + " не найдено в каталоге");
         return pageManager.getRegardCatalogPage();
     }

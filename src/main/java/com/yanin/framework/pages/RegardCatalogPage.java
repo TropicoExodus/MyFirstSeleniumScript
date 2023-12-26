@@ -75,7 +75,7 @@ public class RegardCatalogPage {
 
 
 
-    @Step("Вводим значение цены мин {'priceValue'}")
+    @Step("Вводим значение цены мин От {'priceValue'} рублей")
     public RegardCatalogPage setMinPriceFilter(String priceValue) {
         waitTime.until(ExpectedConditions.visibilityOf(minPriceInput));
         minPriceInput.click();
@@ -86,7 +86,7 @@ public class RegardCatalogPage {
         waitTime.until(ExpectedConditions.attributeToBe(minPriceInput, "value", priceValue));
         return pageManager.getRegardCatalogPage();
     }
-    @Step(" Выбираем производителя {'vendorCheckbox'}")
+    @Step("Выбираем производителя {'vendorCheckbox'}")
     public RegardCatalogPage setVendorByCheck(String vendorCheckbox) {
         for (WebElement itemMenu: setVendor) {
             if(itemMenu.getText().contains(vendorCheckbox)) {
@@ -99,6 +99,7 @@ public class RegardCatalogPage {
         return pageManager.getRegardCatalogPage();
     }
 
+    @Step ("Ожмдаем загрузки после применения фильтрации")
     public RegardCatalogPage waitForFilterCountToUpdate() {
         String oldCount = filterCountElement.getText();
         waitTime.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(filterCountElement, oldCount)));
