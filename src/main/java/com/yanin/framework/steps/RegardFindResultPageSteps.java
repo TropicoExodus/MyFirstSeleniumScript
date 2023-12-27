@@ -17,8 +17,8 @@ public class RegardFindResultPageSteps {
     }
 
     @И("проверяем соответствие найденного товара ранее сохраненному")
-    public void checkFoundProductName (String getFirstProductText) {
-        pageManager.getRegardCatalogPage().getFirstProductText();
+    public void checkFoundProductName () {
+        pageManager.getRegardFindResultPage().checkFoundProductName(pageManager.getRegardCatalogPage().getFirstProductText());
     }
 
 }
