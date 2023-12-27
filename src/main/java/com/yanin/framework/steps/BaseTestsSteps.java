@@ -3,6 +3,8 @@ package com.yanin.framework.steps;
 import com.yanin.framework.managers.DriverManager;
 import com.yanin.framework.managers.PageManager;
 import io.cucumber.java.ru.Допустим;
+import io.cucumber.java.ru.И;
+import org.junit.After;
 import org.junit.Before;
 
 public class BaseTestsSteps {
@@ -14,6 +16,11 @@ public class BaseTestsSteps {
 
         driverManager.getDriver().get("http://regard.ru");
 
+    }
+    @After
+    @И("закрываем браузер")
+    public  void after() {
+        driverManager.quitDriver();
     }
 
 }
