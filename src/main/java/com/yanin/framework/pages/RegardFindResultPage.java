@@ -55,7 +55,7 @@ public class RegardFindResultPage {
 //        waitTime.until(ExpectedConditions.visibilityOf(findedItem));
 //        return findedItem.getAttribute("title");
 //    }
-
+    @Step("Проверяем соответствие найденного товара ранее сохраненному")
     public RegardFindResultPage checkFoundProductName(String expectedProductName) {
         String actualProductName = findedItem.getAttribute("title");
         Assert.assertEquals("Наименование найденного товара не соответствует ожидаемому", expectedProductName, actualProductName);
